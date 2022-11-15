@@ -41,10 +41,11 @@ class MyApp extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 100, horizontal: 25),
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     controller: controller,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       hintText: "Type your score",
                       prefixIcon: Icon(
@@ -62,7 +63,27 @@ class MyApp extends StatelessWidget {
                     style: TextStyle(fontSize: 30),
                   ),
                   onPressed: () {
-                    print(controller.text);
+                    // print(controller.text);
+
+                    int? grade = int.tryParse(controller.text);
+
+                    if (grade == null) {
+                      print("${controller.text} is not a number!");
+                      return;
+                    }
+                    if (grade < 0) {
+                      print("Grade can't be less than 0");
+                    } else if (grade >= 90) {
+                      print("A");
+                    } else if (grade >= 80) {
+                      print("B");
+                    } else if (grade >= 70) {
+                      print("C");
+                    } else if (grade >= 60) {
+                      print("D");
+                    } else {
+                      print("F");
+                    }
                   },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
